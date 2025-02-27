@@ -1,0 +1,42 @@
+My solution :
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        string str = to_string(x);
+        int left = 0;
+        int right = str.length() - 1;
+
+        while (right > left) {
+            if (str[left] != str[right])
+                return false;
+            left++;
+            right--;
+        }
+        return true;
+    }
+};
+
+Best solution :
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        long long rev=0;
+        long long n=x;
+        if(n>=0){
+		while(n!=0){
+		    long long r=n%10;
+		    rev=rev*10+r;
+		    n=n/10;
+		}
+		if(x==rev){
+		    return true;
+		}
+		else{
+		    return false;
+		}
+        }
+        return false;
+    }
+};

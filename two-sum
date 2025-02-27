@@ -1,0 +1,35 @@
+My code :
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        for (int i = 0; i < nums.size(); i++) {
+            for (int j = 0; j < nums.size(); j++) {
+                if (nums[i] + nums[j] == target && i != j) {
+                    return {i,j};
+                }
+            }
+        }
+        return {};
+    }
+};
+
+A better solution :
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> numMap; // on créer un map (clé : valeur, valeur : indice).
+
+        for(int i = 0; i < nums.size(); i++) {
+            int complement = target - nums[i]; //on calcule le complément 
+            if (numMap.count(complement)) { //Si dans le map on a une clé qui est le complément :
+                return {numMap[complement], i}; //Alors on retourn la valeur de la clé avec notre indice i.
+            }
+
+            numMap[nums[i]] = i; // Si ce n'est pas le cas on rajoute le i dans le map.
+        }
+
+        return {-1, -1};
+    }
+};
