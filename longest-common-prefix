@@ -1,0 +1,75 @@
+My solution :
+
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        string toReturn = "";
+        int indexChar = 0;
+        string firstElement = strs[0];
+        while (indexChar < firstElement.length()) {
+            char mem = firstElement[indexChar]; 
+            for (string str : strs) { 
+                if (str[indexChar] != mem) { 
+                    return toReturn; 
+                }
+            }
+            indexChar++;
+            toReturn += mem;
+        }
+        return toReturn;
+    }
+};
+
+
+Best solution :
+
+class Node{
+    public:
+    Node * arr[26];
+
+    Node (){
+        for(int i=0;i<26;i++){
+            arr[i]=NULL;
+        }
+    }
+
+    Node * isExist(char ch){
+        return arr[ch-'a'];
+    }
+    Node *getNode(char ch){
+        return arr[ch-'a'];
+    }
+    void putNode(char ch, Node * node){
+        arr[ch-'a']=node;
+    }
+
+};
+class Solution {
+public:
+
+    string longestCommonPrefix(vector<string>& strs) {
+        Node * root=new Node();
+        int mini=200;
+        for(int i=0;i<strs.size();i++){
+            Node * temp=root;
+            int j=0;
+            for(;j<strs[i].size();j++){
+                    if(!temp->isExist(strs[i][j])){
+                        if(i>0) mini=min(mini, j);
+                        temp->putNode(strs[i][j], new Node());
+
+                    }
+                    temp=temp->getNode(strs[i][j]);
+
+                }
+               if(i>0) mini=min(mini, j);
+        }
+        string ans;
+        for(int i=0;i<strs[0].size() && mini;i++){
+              ans+=strs[0][i];
+              mini--;
+        }
+        return ans;
+        
+    }
+};

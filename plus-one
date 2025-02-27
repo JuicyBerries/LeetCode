@@ -1,0 +1,46 @@
+My solution :
+
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        int index = digits.size()-1;
+        while (index > 0 && digits[index] == 9) {
+            digits[index] = 0;
+            index--;
+        }
+
+        if (digits[index] + 1 > 9) {
+            cout << "test";
+            vector<int> newVector = {1};
+            for (int i = 0; i < digits.size() ; i++) {
+                newVector.push_back(0);
+            }
+            return newVector;
+        } else {
+            digits[index] += 1;
+        }
+        return digits;
+    }
+};
+
+Best solution :
+
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        int index = digits.size() - 1;
+        while(index >= 0) {
+            if(digits[index] + 1 != 10) {
+                digits[index] += 1;
+                break; 
+            } else {
+                digits[index] = 0;
+            }
+            index--;
+        }
+        if(index == -1) {
+            digits.insert(digits.begin(), 1);
+        }
+        return digits;
+    }
+};
