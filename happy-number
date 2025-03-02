@@ -1,0 +1,23 @@
+My solution :
+
+class Solution {
+public:
+    int intToInt(int n) {
+        int tmp = 0;
+        while (n > 0) {
+            cout << "n : " << n << endl;
+            int mod = n % 10;
+            tmp += mod*mod;
+            n = ceil(n/10);
+            cout << "n : " << n << endl;
+        }
+        cout << "tmp : " << tmp;
+        return tmp;
+    }
+    bool isHappy(int n) {
+        while (n > 4) {
+            n = intToInt(n);
+        }
+        return n <= 1;
+    }
+};
