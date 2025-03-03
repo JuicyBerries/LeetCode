@@ -1,0 +1,49 @@
+My solution :
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int major;
+        for(int i = 0; i < nums.size(); i++) {
+            int major = nums[i];
+            int nb = 0;
+            for (int j = i; j < nums.size(); j++) {
+                if (nums[j] == nums[i]) {
+                    nb++;
+                }
+            }
+            if (nb >= nums.size()/2+1) {
+                return major;
+            }
+        }
+        return -1;
+    }
+};
+
+
+Best solution :
+I really like this solution bcs it doesn't compare numbers, as we for sure know there is
+a majority element that appears n/2+1 times, you just add 1 when you find similaire pair, or 
+decrease by one when not.
+[X,Y,X,Z,X] : no pair so major is the last (X).
+[X,X,Y,Z,X] : count increase by 2 ([X,X]), then decrease by 2 ([Y,Z]) so count is 0 then last ele.
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int candidate = nums[0];
+        int count = 1;
+        for (int i = 1; i < nums.size(); ++i) {
+            if (nums[i] == candidate) {
+                ++count;
+            } else {
+                --count;
+                if (count == 0) {
+                    candidate = nums[i];
+                    count = 1;
+                }
+            }
+        }
+        return candidate;
+    }
+};
